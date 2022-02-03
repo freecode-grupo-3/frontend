@@ -30,7 +30,7 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/@popperjs/core/dist/umd/popper.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
           "configurations": {
@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "medicrumbs"
+    }
+  },
+  "defaultProject": "medicrumbs",
+  "cli": {
+    "analytics": "5cd49854-224f-4448-bb74-782af16e317b"
+  }
 }
