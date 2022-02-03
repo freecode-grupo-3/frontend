@@ -3,40 +3,40 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1>Selecciona todas tus Necesidades</h1>
+                <h2>Selecciona las enfermedades a de las que necesites tener información</h2>
             </div>
         </div>
 
         <div class="row">
-            <div class="col" *ngFor="let enfermedad of enfermedades">
-                <div class="card" (click)="selectEnfermedad($event, enfermedad.id)" >
+            <div class="col" *ngFor="let disease of diseases">
+                <div [ngClass]="disease.choosen ? 'card selected' : 'card'" (click)="selectDisease($event, disease)" >
                     <div class="card-body">
-                        {{enfermedad.name}}
+                        {{disease.name}}
                     </div>
                 </div>
             </div>
         </div>
 
+        <br>
+
         <div class="row">
-            <div class="col" *ngFor="let medicina of medicinas">
-                <div class="card" (click)="selectMedicina($event, medicina.id)" >
+            <div class="col">
+                <h3>Ahora, ¿qué tipo de información te parece relevante sobre las enfermedades que escogiste?</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col" *ngFor="let need of needs">
+                <div [ngClass]="need.choosen ? 'card selected' : 'card'" (click)="selectNeed($event, need)" >
                     <div class="card-body">
-                        {{medicina.name}}
+                        {{need.name}}
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col" *ngFor="let tratamiento of tratamientos">
-                <div class="card" (click)="selectTratamiento($event, tratamiento.id)" >
-                    <div class="card-body">
-                        {{tratamiento.name}}
-                    </div>
-                </div>
-            </div>
-        </div>
 
+        <br>
 
         <div class="row">
             <div class="col">
