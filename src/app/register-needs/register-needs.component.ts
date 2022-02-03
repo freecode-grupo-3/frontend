@@ -81,6 +81,7 @@ export class RegisterNeedsComponent implements OnInit {
     this.diseasesAndNeedsService.setupPreferences(diseases.map(d => d.name), needs.map(n => n.name)).subscribe(response => {
       console.log('success')
       console.log(response)
+      this.router.navigateByUrl('/feed')
     }, error => {
       console.log('error')
       console.log(error)
