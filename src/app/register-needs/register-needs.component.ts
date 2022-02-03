@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DiseasesAndNeedsService } from '../services/diseases-and-needs.service';
 
 @Component({
   selector: 'app-register-needs',
@@ -9,92 +10,77 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class RegisterNeedsComponent implements OnInit {
 
   userID: number;
-  enfermedades = [
-    {name: 'Enfermedad 1', id: 1},
-    {name: 'Enfermedad 2', id: 2},
-    {name: 'Enfermedad 3', id: 3},
-  ]
+  diseases: {name: string, id: number}[];
+  needs: Array<{name: string, id: number}>;
 
-  medicinas = [
-    {name: 'Medicinas 1', id: 1},
-    {name: 'Medicinas 2', id: 2},
-    {name: 'Medicinas 3', id: 3},
-  ]
-
-  tratamientos = [
-    {name: 'Tratamientos 1', id: 1},
-    {name: 'Tratamientos 2', id: 2},
-    {name: 'Tratamientos 3', id: 3},
-    {name: 'Tratamientos 4', id: 4},
-    {name: 'Tratamientos 5', id: 5},
-  ]
-
-  enfermedadesList: Array<any> = [];
-  medicinasList: Array<any> = [];
-  tratamientosList: Array<any> = [];
+  diseasesList: {name: string, id: number}[];
+  needList: {name: string, id: number}[];
 
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-  ) { }
+    private diseasesAndNeedsService: DiseasesAndNeedsService
+  ) {
+  }
 
   ngOnInit(): void {
     // Obtener id de la propiedad
     this.userID = Number(this.route.snapshot.paramMap.get('id'));
-    
+
+    this.diseasesAndNeedsService.diseases().subscribe(response => {
+      this.diseases = response.map(r => ({
+        id: r.id,
+        name: r.name
+      }))
+    }, error => {
+      console.error(error)
+    })
+
+    this.diseasesAndNeedsService.needs().subscribe(response => {
+      this.needs = response.map(r => ({
+        id: r.id,
+        name: r.name
+      }))
+    }, error => {
+      console.error(error)
+    })
+
   }
 
   /**
    * selectEnfermedad
    */
-  public selectEnfermedad(event, id) {
+  public selectDisease(event, id) {
     let tag = event.target;
     // Add class selected
     if (tag.classList.contains('selected')){
       tag.classList.remove('selected')
-      const index = this.enfermedadesList.indexOf(id);
-      this.enfermedadesList.splice(index,1);
+      const index = this.diseasesList.indexOf(id);
+      this.diseasesList.splice(index,1);
     }
     else{
       tag.classList.add('selected')
-      this.enfermedadesList.push(id)
+      this.diseasesList.push(id)
     }
   }
 
   /**
    * selectMedicina
    */
-   public selectMedicina(event, id) {
+   public selectNeed(event, id) {
     let tag = event.target;
     // Add class selected
     if (tag.classList.contains('selected')){
       tag.classList.remove('selected')
-      const index = this.medicinasList.indexOf(id);
-      this.medicinasList.splice(index,1);
+      const index = this.needList.indexOf(id);
+      this.needList.splice(index,1);
     }
     else{
       tag.classList.add('selected')
-      this.medicinasList.push(id)
+      this.needList.push(id)
     }
     
-  }
-
-  /**
-   * selectTratamiento
-   */
-   public selectTratamiento(event, id) {
-    let tag = event.target;
-    // Add class selected
-    if (tag.classList.contains('selected')){
-      tag.classList.remove('selected')
-      const index = this.tratamientosList.indexOf(id);
-      this.tratamientosList.splice(index,1);
-    }
-    else{
-      tag.classList.add('selected')
-      this.tratamientosList.push(id)
-    }
   }
 
   /**
@@ -103,9 +89,9 @@ export class RegisterNeedsComponent implements OnInit {
   public submit() {
     console.log(this.userID);
     
-    console.log("Enfermedades: ", this.enfermedadesList);
-    console.log("Medicinas: ", this.medicinasList);
-    console.log("Tratamientos: ", this.tratamientosList);
+    console.log("Enfermedades: ", this.diseasesList);
+    console.log("Medicinas: ", this.needList);
+    console.log("Tratamientos: ", this.needList);
     
     
     
