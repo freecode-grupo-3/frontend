@@ -1,1 +1,27 @@
-<p>feed works!</p>
+<div class="wrap">
+
+    <div class="feed">
+        <div class="container">
+            <div class="row" *ngFor="let entry of entries">
+                <div class="card medicine" *ngIf="entry.type_of_reference == 'medicine'">
+                    <div class="card-body">
+
+                    </div>
+                </div>
+
+                <div class="card lab-test" *ngIf="entry.type_of_reference == 'lab-test'">
+                    <div class="card-body">
+
+                    </div>
+                </div>
+
+                <div class="card doctor" *ngIf="entry.type_of_reference == 'doctor'">
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

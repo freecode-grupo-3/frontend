@@ -9,6 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import { RegisterNeedsComponent } from './register-needs/register-needs.component';
 import { LoginComponent } from './login/login.component';
 import { FeedComponent } from './feed/feed.component';
+import { UserInterceptor } from './interceptor/user.interceptor';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { FeedComponent } from './feed/feed.component';
     ReactiveFormsModule,
   ],
   providers: [
-    // { provide: HTTP_INTERCEPTORS, useClass: UserInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: UserInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

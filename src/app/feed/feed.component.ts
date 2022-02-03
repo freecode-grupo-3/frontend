@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from '../services/http.service';
 
 @Component({
   selector: 'app-feed',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeedComponent implements OnInit {
 
-  constructor() { }
+  entries: Array<any>;
+  constructor(
+    private httpService: HttpService,
+  ) { }
 
   ngOnInit(): void {
+    this.httpService.getFeed().subscribe(
+      entries => {
+        this.entries = entries;
+      }
+    )
   }
 
 }

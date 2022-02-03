@@ -1,0 +1,28 @@
+.wrap{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color: #ccc;
+}
+
+.feed{
+    border-radius: 10px;
+    width: 50%;
+    height: 100%;
+    background-color: whitesmoke;
+    padding: 20px 10px;
+}
+
+.medicine{
+    background-color: green;
+}
+
+.lab-test{
+    background-color: bisque;
+}
+
+.doctor{
+    background-color: cadetblue;
+}
+
