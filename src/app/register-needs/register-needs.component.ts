@@ -48,9 +48,8 @@ export class RegisterNeedsComponent implements OnInit {
   /**
    * selectEnfermedad
    */
-  public selectEnfermedad(event) {
+  public selectEnfermedad(event, id) {
     let tag = event.target;
-    let id = parseInt(tag.ident)
     // Add class selected
     if (tag.classList.contains('selected')){
       tag.classList.remove('selected')
@@ -66,9 +65,8 @@ export class RegisterNeedsComponent implements OnInit {
   /**
    * selectMedicina
    */
-   public selectMedicina(event) {
+   public selectMedicina(event, id) {
     let tag = event.target;
-    let id = parseInt(tag.ident)
     // Add class selected
     if (tag.classList.contains('selected')){
       tag.classList.remove('selected')
@@ -85,9 +83,8 @@ export class RegisterNeedsComponent implements OnInit {
   /**
    * selectTratamiento
    */
-   public selectTratamiento(event) {
+   public selectTratamiento(event, id) {
     let tag = event.target;
-    let id = parseInt(tag.ident)
     // Add class selected
     if (tag.classList.contains('selected')){
       tag.classList.remove('selected')

@@ -9,8 +9,8 @@
 
         <div class="row">
             <div class="col" *ngFor="let enfermedad of enfermedades">
-                <div class="card" (click)="selectEnfermedad($event)" >
-                    <div class="card-body" data-ident="{{enfermedad.id}}">
+                <div class="card" (click)="selectEnfermedad($event, enfermedad.id)" >
+                    <div class="card-body">
                         {{enfermedad.name}}
                     </div>
                 </div>
@@ -19,8 +19,8 @@
 
         <div class="row">
             <div class="col" *ngFor="let medicina of medicinas">
-                <div class="card" (click)="selectMedicina($event)" >
-                    <div class="card-body" data-ident="{{medicina.id}}">
+                <div class="card" (click)="selectMedicina($event, medicina.id)" >
+                    <div class="card-body">
                         {{medicina.name}}
                     </div>
                 </div>
@@ -29,8 +29,8 @@
 
         <div class="row">
             <div class="col" *ngFor="let tratamiento of tratamientos">
-                <div class="card" (click)="selectTratamiento($event)" >
-                    <div class="card-body" data-ident="{{tratamiento.id}}">
+                <div class="card" (click)="selectTratamiento($event, tratamiento.id)" >
+                    <div class="card-body">
                         {{tratamiento.name}}
                     </div>
                 </div>

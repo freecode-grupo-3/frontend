@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpService } from '../services/http.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -36,16 +38,14 @@ export class LoginComponent implements OnInit {
       console.error("Form Invalido", this.form.errors)
       return;
     }
-
-    console.log("Logueando")
-    // this.httpService.createClient(this.form.value).subscribe(
-    //   response => {
-    //     alert("Cliente creado")
-    //     this.router.navigateByUrl('/client')
-    //   }
-    // )
-    this.router.navigateByUrl(`/feed`)
     
+    this.userService.login(this.form.value).subscribe(
+      response => {
+        console.log("Bienvenido");
+        
+        this.router.navigateByUrl(`/feed`)
+      }
+    )
   }
 
 }
