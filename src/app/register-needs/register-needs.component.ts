@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DiseasesAndNeedsService } from '../services/diseases-and-needs.service';
 
 @Component({
   selector: 'app-register-needs',
@@ -9,106 +10,81 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class RegisterNeedsComponent implements OnInit {
 
   userID: number;
-  enfermedades = [
-    {name: 'Enfermedad 1', id: 1},
-    {name: 'Enfermedad 2', id: 2},
-    {name: 'Enfermedad 3', id: 3},
-  ]
-
-  medicinas = [
-    {name: 'Medicinas 1', id: 1},
-    {name: 'Medicinas 2', id: 2},
-    {name: 'Medicinas 3', id: 3},
-  ]
-
-  tratamientos = [
-    {name: 'Tratamientos 1', id: 1},
-    {name: 'Tratamientos 2', id: 2},
-    {name: 'Tratamientos 3', id: 3},
-    {name: 'Tratamientos 4', id: 4},
-    {name: 'Tratamientos 5', id: 5},
-  ]
-
-  enfermedadesList: Array<any> = [];
-  medicinasList: Array<any> = [];
-  tratamientosList: Array<any> = [];
+  diseases: {name: string, id: number, choosen: boolean}[];
+  needs: Array<{name: string, id: number, choosen: boolean}>;
 
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-  ) { }
+    private diseasesAndNeedsService: DiseasesAndNeedsService
+  ) {
+  }
 
   ngOnInit(): void {
     // Obtener id de la propiedad
     this.userID = Number(this.route.snapshot.paramMap.get('id'));
-    
+
+    this.diseasesAndNeedsService.diseases().subscribe(response => {
+      this.diseases = response.map(r => ({
+        id: r.id,
+        name: r.name,
+        choosen: false,
+      }))
+    }, error => {
+      console.error(error)
+    })
+
+    this.diseasesAndNeedsService.needs().subscribe(response => {
+      this.needs = response.map(r => ({
+        id: r.id,
+        name: r.name,
+        choosen: true,
+      }))
+    }, error => {
+      console.error(error)
+    })
+
   }
 
   /**
    * selectEnfermedad
    */
-  public selectEnfermedad(event, id) {
-    let tag = event.target;
-    // Add class selected
-    if (tag.classList.contains('selected')){
-      tag.classList.remove('selected')
-      const index = this.enfermedadesList.indexOf(id);
-      this.enfermedadesList.splice(index,1);
-    }
-    else{
-      tag.classList.add('selected')
-      this.enfermedadesList.push(id)
-    }
+  public selectDisease(event, disease) {
+    disease.choosen = !disease.choosen
   }
 
   /**
    * selectMedicina
    */
-   public selectMedicina(event, id) {
-    let tag = event.target;
-    // Add class selected
-    if (tag.classList.contains('selected')){
-      tag.classList.remove('selected')
-      const index = this.medicinasList.indexOf(id);
-      this.medicinasList.splice(index,1);
-    }
-    else{
-      tag.classList.add('selected')
-      this.medicinasList.push(id)
-    }
-    
-  }
-
-  /**
-   * selectTratamiento
-   */
-   public selectTratamiento(event, id) {
-    let tag = event.target;
-    // Add class selected
-    if (tag.classList.contains('selected')){
-      tag.classList.remove('selected')
-      const index = this.tratamientosList.indexOf(id);
-      this.tratamientosList.splice(index,1);
-    }
-    else{
-      tag.classList.add('selected')
-      this.tratamientosList.push(id)
-    }
+   public selectNeed(event, need) {
+    need.choosen = !need.choosen
   }
 
   /**
    * submit
    */
   public submit() {
-    console.log(this.userID);
-    
-    console.log("Enfermedades: ", this.enfermedadesList);
-    console.log("Medicinas: ", this.medicinasList);
-    console.log("Tratamientos: ", this.tratamientosList);
-    
-    
-    
-  }
+    const diseases = this.diseases.filter(disease => disease.choosen)
+    const needs = this.needs.filter(need => need.choosen)
+    if (needs.length === 0) {
+      alert('Debes escoger al menos un tipo de información')
+      return
+    }
 
+    if (diseases.length === 0) {
+      alert('Debes escoger al menos una enfermedad de interés')
+      return
+    }
+
+    console.log(diseases, needs)
+    this.diseasesAndNeedsService.setupPreferences(diseases.map(d => d.name), needs.map(n => n.name)).subscribe(response => {
+      console.log('success')
+      console.log(response)
+      this.router.navigateByUrl('/feed')
+    }, error => {
+      console.log('error')
+      console.log(error)
+    })
+  }
 }

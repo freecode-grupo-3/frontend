@@ -76,7 +76,7 @@ export class UserService {
    * register
    */
   public register(form) {
-    return this.http.post<any>(`${environment.API}/users/register/`, form);
-    
+    console.log(form)
+    return this.http.post<any>(`${environment.API}/users/create/`, form);
   }
 }
