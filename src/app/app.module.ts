@@ -10,6 +10,7 @@ import { RegisterNeedsComponent } from './register-needs/register-needs.componen
 import { LoginComponent } from './login/login.component';
 import { FeedComponent } from './feed/feed.component';
 import { UserInterceptor } from './interceptor/user.interceptor';
+import { AddReferenceComponent } from './add-reference/add-reference.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { UserInterceptor } from './interceptor/user.interceptor';
     RegisterComponent,
     RegisterNeedsComponent,
     LoginComponent,
-    FeedComponent
+    FeedComponent,
+    AddReferenceComponent
   ],
   imports: [
     BrowserModule,

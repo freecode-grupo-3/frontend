@@ -1,28 +1,42 @@
-.wrap{
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    background-color: #ccc;
-}
-
 .feed{
     border-radius: 10px;
     width: 50%;
     height: 100%;
-    background-color: whitesmoke;
+    background-color: #e8f5ff;
     padding: 20px 10px;
 }
 
+.entry{
+    margin: 20px 0;
+}
+
 .medicine{
-    background-color: green;
+    background-color: #628B48;
 }
 
 .lab-test{
-    background-color: bisque;
+    background-color: #F1AB86;
 }
 
 .doctor{
-    background-color: cadetblue;
+    background-color: #90F1EF;
 }
 
+.pharmacy{
+    background-color: #2196F3;
+}
+
+.botones-rating{
+    display: flex;
+    flex-direction: row;
+
+}
+
+.brt{
+    margin: 0 5px;
+}
+
+.head{
+    display: flex;
+    justify-content: space-between;
+}

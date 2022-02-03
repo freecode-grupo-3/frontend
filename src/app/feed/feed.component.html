@@ -2,24 +2,72 @@
 
     <div class="feed">
         <div class="container">
-            <div class="row" *ngFor="let entry of entries">
+            <div class="head">
+                <span>Bienvenido</span>
+                <span (click)="logout()" >LogOut</span>
+            </div>
+            <div class="search">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1" (click)="buscar($event)"><i class="fas fa-search"></i></span>
+                    <input type="text" class="form-control" placeholder="Busca algo!" aria-label="Username" aria-describedby="basic-addon1">
+                  </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row entry" *ngFor="let entry of entries">
                 <div class="card medicine" *ngIf="entry.type_of_reference == 'medicine'">
                     <div class="card-body">
-
+                        <h3 class="card-title">
+                            <i class="fas fa-pills"></i> {{entry.name}}
+                        </h3>
+                        
+                        <div class="botones-rating">
+                            <button class="btn btn-outline-dark btn-sm brt">Util</button>
+                            <button class="btn btn-outline-dark btn-sm brt">No Util</button>
+                        </div>
                     </div>
                 </div>
 
                 <div class="card lab-test" *ngIf="entry.type_of_reference == 'lab-test'">
                     <div class="card-body">
+                        <h3 class="card-title">
+                            <i class="fas fa-vial"></i> {{entry.name}}
+                        </h3>
 
+                        <div class="botones-rating">
+                            <button class="btn btn-outline-dark btn-sm brt">Util</button>
+                            <button class="btn btn-outline-dark btn-sm brt">No Util</button>
+                        </div>
                     </div>
                 </div>
 
                 <div class="card doctor" *ngIf="entry.type_of_reference == 'doctor'">
                     <div class="card-body">
+                        <h3 class="card-title">
+                            <i class="fas fa-user-md"></i> {{entry.name}}
+                        </h3>
+                        <p><b>Especialidad:</b> {{entry.specialty}}</p>
 
+                        <div class="botones-rating">
+                            <button class="btn btn-outline-dark btn-sm brt">Util</button>
+                            <button class="btn btn-outline-dark btn-sm brt">No Util</button>
+                        </div>
                     </div>
                 </div>
+
+                <div class="card pharmacy" *ngIf="entry.type_of_reference == 'pharmacy'">
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            <i class="fas fa-mortar-pestle"></i> {{entry.name}}
+                        </h3>
+                        
+                        <div class="botones-rating">
+                            <button class="btn btn-outline-dark btn-sm brt">Util</button>
+                            <button class="btn btn-outline-dark btn-sm brt">No Util</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
