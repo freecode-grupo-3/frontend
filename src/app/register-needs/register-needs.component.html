@@ -1,51 +1,49 @@
 <div class="wrap">
-
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h2>Selecciona las enfermedades a de las que necesites tener información</h2>
+    <div class="cont">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h2>Selecciona las enfermedades a de las que necesites tener información</h2>
+                </div>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col" *ngFor="let disease of diseases">
-                <div [ngClass]="disease.choosen ? 'card selected' : 'card'" (click)="selectDisease($event, disease)" >
-                    <div class="card-body">
-                        {{disease.name}}
+    
+            <div class="row">
+                <div class="col" *ngFor="let disease of diseases">
+                    <div [ngClass]="disease.choosen ? 'card selected' : 'card'" (click)="selectDisease($event, disease)" >
+                        <div class="card-body">
+                            {{disease.name}}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <br>
-
-        <div class="row">
-            <div class="col">
-                <h3>Ahora, ¿qué tipo de información te parece relevante sobre las enfermedades que escogiste?</h3>
+    
+            <br>
+    
+            <div class="row">
+                <div class="col">
+                    <h3>Ahora, ¿qué tipo de información te parece relevante sobre las enfermedades que escogiste?</h3>
+                </div>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col" *ngFor="let need of needs">
-                <div [ngClass]="need.choosen ? 'card selected' : 'card'" (click)="selectNeed($event, need)" >
-                    <div class="card-body">
-                        {{need.name}}
+    
+            <div class="row">
+                <div class="col" *ngFor="let need of needs">
+                    <div [ngClass]="need.choosen ? 'card selected' : 'card'" (click)="selectNeed($event, need)" >
+                        <div class="card-body">
+                            {{need.name}}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-
-        <br>
-
-        <div class="row">
-            <div class="col">
-                <button class="btn btn-success" (click)="submit()">Aceptar</button>
-                <button class="btn btn-danger">Cancel</button>
+    
+    
+            <br>
+    
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-success" (click)="submit()">Aceptar</button>
+                    <button class="btn btn-danger">Cancel</button>
+                </div>
             </div>
         </div>
     </div>
-
-
-
 </div>

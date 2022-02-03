@@ -18,7 +18,7 @@ export class AppComponent {
     private router: Router,
   ) { 
     this.userService.currentUser.subscribe(x => this.user = x);
-    this.userService.currentUserInfo.subscribe(x => {this.userInfo = x; this.userGroup = x.groups[0].name});
+    // this.userService.currentUserInfo.subscribe(x => {this.userInfo = x; this.userGroup = x.groups[0].name});
   }
 
   ngOnInit() {}
