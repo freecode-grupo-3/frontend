@@ -16,4 +16,11 @@ export class DiseasesAndNeedsService {
   public needs() {
     return this.http.get<Array<{id: number, name: string, description: string}>>(`${environment.API}/reference-types/`);
   }
+
+  public setupPreferences(diseases: string[], needs: string[]) {
+    return this.http.put<void>(`${environment.API}/users/setup-feed/`, {
+      diseases_of_interest: diseases,
+      reference_types_of_interest: needs,
+    })
+  }
 }

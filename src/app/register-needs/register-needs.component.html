@@ -9,7 +9,7 @@
 
         <div class="row">
             <div class="col" *ngFor="let disease of diseases">
-                <div class="card" (click)="selectDisease($event, disease.id)" >
+                <div [ngClass]="disease.choosen ? 'card selected' : 'card'" (click)="selectDisease($event, disease)" >
                     <div class="card-body">
                         {{disease.name}}
                     </div>
@@ -27,7 +27,7 @@
 
         <div class="row">
             <div class="col" *ngFor="let need of needs">
-                <div class="card" (click)="selectNeed($event, need.id)" >
+                <div [ngClass]="need.choosen ? 'card selected' : 'card'" (click)="selectNeed($event, need)" >
                     <div class="card-body">
                         {{need.name}}
                     </div>
@@ -35,6 +35,8 @@
             </div>
         </div>
 
+
+        <br>
 
         <div class="row">
             <div class="col">

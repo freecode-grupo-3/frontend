@@ -1,3 +1,8 @@
 .selected{
     background-color: green;
+    color: white;
+}
+
+.card {
+    cursor: pointer;
 }

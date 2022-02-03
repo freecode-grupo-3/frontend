@@ -10,11 +10,8 @@ import { DiseasesAndNeedsService } from '../services/diseases-and-needs.service'
 export class RegisterNeedsComponent implements OnInit {
 
   userID: number;
-  diseases: {name: string, id: number}[];
-  needs: Array<{name: string, id: number}>;
-
-  diseasesList: {name: string, id: number}[];
-  needList: {name: string, id: number}[];
+  diseases: {name: string, id: number, choosen: boolean}[];
+  needs: Array<{name: string, id: number, choosen: boolean}>;
 
 
   constructor(
@@ -31,7 +28,8 @@ export class RegisterNeedsComponent implements OnInit {
     this.diseasesAndNeedsService.diseases().subscribe(response => {
       this.diseases = response.map(r => ({
         id: r.id,
-        name: r.name
+        name: r.name,
+        choosen: false,
       }))
     }, error => {
       console.error(error)
@@ -40,7 +38,8 @@ export class RegisterNeedsComponent implements OnInit {
     this.diseasesAndNeedsService.needs().subscribe(response => {
       this.needs = response.map(r => ({
         id: r.id,
-        name: r.name
+        name: r.name,
+        choosen: true,
       }))
     }, error => {
       console.error(error)
@@ -51,50 +50,40 @@ export class RegisterNeedsComponent implements OnInit {
   /**
    * selectEnfermedad
    */
-  public selectDisease(event, id) {
-    let tag = event.target;
-    // Add class selected
-    if (tag.classList.contains('selected')){
-      tag.classList.remove('selected')
-      const index = this.diseasesList.indexOf(id);
-      this.diseasesList.splice(index,1);
-    }
-    else{
-      tag.classList.add('selected')
-      this.diseasesList.push(id)
-    }
+  public selectDisease(event, disease) {
+    disease.choosen = !disease.choosen
   }
 
   /**
    * selectMedicina
    */
-   public selectNeed(event, id) {
-    let tag = event.target;
-    // Add class selected
-    if (tag.classList.contains('selected')){
-      tag.classList.remove('selected')
-      const index = this.needList.indexOf(id);
-      this.needList.splice(index,1);
-    }
-    else{
-      tag.classList.add('selected')
-      this.needList.push(id)
-    }
-    
+   public selectNeed(event, need) {
+    need.choosen = !need.choosen
   }
 
   /**
    * submit
    */
   public submit() {
-    console.log(this.userID);
-    
-    console.log("Enfermedades: ", this.diseasesList);
-    console.log("Medicinas: ", this.needList);
-    console.log("Tratamientos: ", this.needList);
-    
-    
-    
-  }
+    const diseases = this.diseases.filter(disease => disease.choosen)
+    const needs = this.needs.filter(need => need.choosen)
+    if (needs.length === 0) {
+      alert('Debes escoger al menos un tipo de información')
+      return
+    }
 
+    if (diseases.length === 0) {
+      alert('Debes escoger al menos una enfermedad de interés')
+      return
+    }
+
+    console.log(diseases, needs)
+    this.diseasesAndNeedsService.setupPreferences(diseases.map(d => d.name), needs.map(n => n.name)).subscribe(response => {
+      console.log('success')
+      console.log(response)
+    }, error => {
+      console.log('error')
+      console.log(error)
+    })
+  }
 }
